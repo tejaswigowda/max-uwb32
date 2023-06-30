@@ -1,0 +1,157 @@
+<html>
+
+<head>
+  <meta name="viewport" content="initial-scale=1.0,   user-scalable=no, width=device-width, maximum-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src='asyncReq.js'> </script>
+  <script src="https://cdn.jsdelivr.net/npm/quaternion@1.1.0/quaternion.min.js"></script>
+  <script>
+
+    var mac_addr;
+    function WebSocketBegin() {
+      mac_addr = window.location.hash.replace("#", "");
+      if ("WebSocket" in window) {
+        console.log("WebSocket is supported by your Browser!");
+
+        // Let us open a web socket
+        var ws = new WebSocket("ws://localhost:3000/web");
+
+        ws.onopen = function () {
+          // Web Socket is connected, send data using send()
+          ws.send("Message to send");
+          console.log("Message is sent...");
+        };
+
+        ws.onmessage = function (evt) {
+          var received_msg = evt.data;
+          // blob to string
+          received_msg.text().then(text => {
+            let blobText = text
+            document.getElementById("data").innerHTML = blobText;
+            try {
+              var x = JSON.parse(blobText);
+              if(blobText)
+                handleMessage(x);
+            }
+            catch (e) {
+              //console.log(e);
+            }
+
+          })
+
+        };
+
+        ws.onclose = function () {
+
+          // websocket is closed.
+          console.log("Connection is closed...");
+        };
+      } else {
+
+        // The browser doesn't support WebSocket
+        console.log("WebSocket NOT supported by your Browser!");
+      }
+    }
+
+    var wZ = 0
+    var xZ = 0
+    var yZ = 0
+    var zZ = 1
+    var obj;
+
+    function start() {
+      var id = window.location.hash.replace("#", "");
+      loadFile("./getValue?id=" + id, function (data) {
+        obj = data;
+      });
+    }
+    function handleMessage(obj) {
+
+      if(obj.links && obj.links.length == 2){
+        var dist = obj.links;
+        dist = dist.sort();
+        dist.reverse();
+        
+        var arr= getTagDistance(parseFloat(dist[1].R), parseFloat(dist[0].R), 9.7);
+        document.getElementById("tag1").style.left = arr[0]/12*90 + "vw";
+        document.getElementById("tag1").style.top = arr[1]/10*90 + "vh";
+        document.getElementById("tag1").innerHTML = arr[0].toFixed(2) + ", " + arr[1].toFixed(2);
+      }
+    }
+
+    function getTagDistance(a, b, c) {
+      
+
+      var x = (a * a - b * b + c * c) / (2 * c);
+      var y = Math.sqrt(a * a - x * x);
+
+      // handle NaN
+
+      if (isNaN(y)) {
+        y = 0;
+      }
+
+
+      //
+      
+            if(!(a<0 || b < 0)) {
+      console.log(x.toFixed(2), y.toFixed(2));
+            }
+      if(x <0 || y < 0) {
+        console.log(a, b, c, x, y);
+      }
+
+
+
+return [x, y];
+
+
+
+    }
+  </script>
+</head>
+
+<body style='background:black;color:white' onload='WebSocketBegin()'>
+  <div id='data' style="color:white"></div>
+  <div id="anchor1">  </div>
+  <div id="anchor2">  </div>
+  <div class='tag' id="tag1">  </div> <!-- add more tags as needed-->
+
+</body>
+<style>
+  .scene {
+    width: 200px;
+    height: 200px;
+    margin: 80px;
+    perspective: 400px;
+  }
+
+  #anchor1{
+    width: 50px;
+    background-color: red;
+    position: fixed;
+    left:0;
+    top:0;
+    height: 50px;
+  }
+
+  #anchor2{
+    width: 50px;
+    background-color: red;
+    position: fixed;
+    right:0;
+    top:0;
+    height: 50px;
+  }
+
+  .tag{
+    width: 20px;
+    background-color: green;
+    position: absolute;
+    height: 20px;
+    border-radius: 50%;
+
+  }
+</style>
+
+</html>
