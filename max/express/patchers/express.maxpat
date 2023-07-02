@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 1,
-			"revision" : 3,
+			"minor" : 5,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 123.0, 231.0, 1387.0, 590.0 ],
+		"rect" : [ 53.0, 129.0, 1425.0, 819.0 ],
 		"bglocked" : 1,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,7 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-2",
@@ -73,7 +74,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 945.5, 56.0, 144.0, 66.0 ],
+					"patching_rect" : [ 1044.5, 82.999998331069946, 144.0, 66.0 ],
 					"text" : "This is the dynamically generated webpage that the server serves"
 				}
 
@@ -235,13 +236,12 @@
 			}
 , 			{
 				"box" : 				{
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-38",
 					"maxclass" : "jweb",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 529.0, 150.999998331069946, 919.666672945022583, 596.000001668930054 ],
+					"patching_rect" : [ 529.0, 150.999998331069946, 633.666672945022583, 590.000001668930054 ],
 					"rendermode" : 0,
 					"url" : "http://localhost:3000/index.html"
 				}
@@ -282,6 +282,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -359,6 +361,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -547,7 +551,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "express-node",
-				"bootpath" : "~/Downloads/posenet-node-max/express",
+				"bootpath" : "~/Downloads/max-uwb32/max/express",
 				"patcherrelativepath" : "..",
 				"type" : "fold",
 				"implicit" : 1

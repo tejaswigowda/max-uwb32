@@ -15,8 +15,8 @@ For ESP32 UWB or ESP32 UWB Pro
 
 
 
-#define WIFI_SSID "Nimbus"
-#define WIFI_PASSWD "richNotComplex"
+#define WIFI_SSID "NETGEAR31"
+#define WIFI_PASSWD "fluffywind2904"
 
 
 #define SPI_SCK 18
